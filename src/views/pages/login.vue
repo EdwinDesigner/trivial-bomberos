@@ -87,12 +87,18 @@
       const { handleSubmit, handleReset } = useForm({
         validationSchema: {
           email (value: string) {
-            if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
-            return 'El email no es valido.'
+            if (!value || value === "") {
+              return 'El email es requerido'
+            }
+            if (!/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return 'El email no es valido.'
+            return true
           },
           password (value: string) {
-            if (value?.length >= 1) return true
-            return 'La contraseña es requerida.'
+            if (!value || value === "") {
+              return 'La contraseña es requerida.'
+            }
+            if (value?.length <= 8) return 'La contraseña debe tener al menos 8 caracteres.'
+            return true
           },
         },
       })
