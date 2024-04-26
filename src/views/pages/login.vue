@@ -1,8 +1,10 @@
 <template>
   <ion-page>
     <div class="bg-bombero-400 w-full min-h-screen">
-      <div class="w-full min-h-screen bg-no-repeat bg-contain bg-bottom" :style="{
+      <div class="w-full min-h-screen bg-no-repeat" :style="{
         backgroundImage: 'url(/images/red-cloud.png)',
+        backgroundPosition: 'bottom',
+        backgroundSize: '100% 70%'
       }">
         <header class="p-4 w-full relative">
           <div class="absolute top-2 right-2">
@@ -13,25 +15,54 @@
             </v-btn>
           </div>
           <img src="/images/logo.png" alt="logo" class="w-36 h-36 absolute top-4 left-2/4 -translate-x-2/4">
-          <img src="/images/image_1.png" alt="image1" class="mt-10">
+          <img src="/images/image_1.png" alt="image1" class="m-auto mt-10">
         </header>
         <main class="px-4 mt-10">
           <h1 class="text-base text-bombero-50 text-center">Inicio de sesión</h1>
           <v-form validate-on="submit lazy" @submit.prevent="submit">
             <v-text-field
-              v-model="email"
-              :rules="rules"
+              v-model="email.value.value"
+              :error-messages="email.errorMessage.value"
+              :error="false"
+              type="email"
               label="Email"
-              class="rounded-pill"
+              rounded="xl"
+              color="#FFF9E5"
+              base-color="#BF2121"
+              bg-color="#BF2121"
+              variant="outlined"
+              class="placeholder:text-bombero-50 text-bombero-50"
             ></v-text-field>
 
-            <v-btn
-              :loading="loading"
-              class="mt-2"
-              text="Submit"
-              type="submit"
-              block
-            ></v-btn> 
+            <v-text-field
+              v-model="password.value.value"
+              :error-messages="password.errorMessage.value"
+              :error="false"
+              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+              :type="visible ? 'text' : 'password'"
+              @click:append-inner="visible = !visible"
+              label="Contraseña"
+              rounded="xl"
+              color="#FFF9E5"
+              base-color="#BF2121"
+              bg-color="#BF2121"
+              variant="outlined"
+              class="placeholder:text-bombero-50 text-bombero-50 mt-4"
+            ></v-text-field>
+
+            <div class="p-2 bg-bombero-800 rounded-full flex justify-between items-center mt-6">
+              <v-btn
+                :loading="loading"
+                text="Entrar"
+                type="submit"
+                size="large"
+                rounded="xl"
+                block
+                color="#FF9433"
+                elevation="0"
+                class="text-bombero-800 py-6 font-bold"
+              ></v-btn>
+            </div>
           </v-form>
         </main>
       </div>
@@ -40,45 +71,72 @@
 </template>
 
 <script lang="ts">
+  import { ref } from 'vue'
   import { IonPage } from '@ionic/vue';
+  import { useField, useForm } from 'vee-validate'
 
   export default {
     components: {
       IonPage,
     },
-    data: vm => ({
-      loading: false,
-      rules: [value => vm.checkApi(value)],
-      timeout: null,
-      email: '',
-    }),
     setup() {
+
+      const loading = ref(false)
+      const visible = ref(false)
+
+      const { handleSubmit, handleReset } = useForm({
+        validationSchema: {
+          email (value: string) {
+            if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
+            return 'El email no es valido.'
+          },
+          password (value: string) {
+            if (value?.length >= 1) return true
+            return 'La contraseña es requerida.'
+          },
+        },
+      })
+
+      const email = useField('email')
+      const password = useField('password')
+
+      const submit = handleSubmit(async (values) => {
+
+        loading.value = true
+
+        await new Promise((resolve, reject) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2))
+            loading.value = false
+            resolve(true)
+          }, 1000);
+        })
+  
+
+      })
+
+      return {
+        password,
+        email,
+        handleSubmit,
+        handleReset,
+        submit,
+        loading,
+        visible,
+      }
+
     },
     methods: {
-      async submit(event) {
-        this.loading = true
-
-        const results = await event
-
-        this.loading = false
-
-        alert(JSON.stringify(results, null, 2))
-      },
-      async checkApi(email) {
-        return new Promise(resolve => {
-          clearTimeout(this.timeout)
-
-          this.timeout = setTimeout(() => {
-            if (!email) return resolve('Please enter a user name.')
-            if (email === 'johnleider')
-              return resolve('User name already taken. Please try another one.')
-
-            return resolve(true)
-          }, 1000)
-        })
-      },
     },
     async mounted() {
     }
   };
 </script>
+<style>
+  .v-field--error:not(.v-field--disabled) .v-field__outline,
+  .v-field--error:not(.v-field--disabled) .v-label.v-field-label,
+  .v-input--error:not(.v-input--disabled) .v-input__details .v-messages,
+  .v-field--error:not(.v-field--disabled) .v-field__append-inner > .v-icon {
+    color: rgb(255, 162, 133);
+  }
+</style>
