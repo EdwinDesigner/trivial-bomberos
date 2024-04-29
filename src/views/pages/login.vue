@@ -74,6 +74,7 @@
   import { ref } from 'vue'
   import { IonPage } from '@ionic/vue';
   import { useField, useForm } from 'vee-validate'
+  import { useRouter } from 'vue-router'
 
   export default {
     components: {
@@ -83,6 +84,7 @@
 
       const loading = ref(false)
       const visible = ref(false)
+      const router = useRouter()
 
       const { handleSubmit, handleReset } = useForm({
         validationSchema: {
@@ -112,12 +114,13 @@
 
         await new Promise((resolve, reject) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
+            console.log(values)
             loading.value = false
             resolve(true)
           }, 1000);
         })
-  
+
+        router.push({ name: 'game-mode' })
 
       })
 

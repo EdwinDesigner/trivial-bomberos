@@ -1,3 +1,22 @@
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #F94848 #c42323;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #c42323;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c42323;
 }
