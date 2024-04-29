@@ -35,7 +35,7 @@
                   elevation="0"
                   color="#BF2121"
                   class="bg-bombero-800 text-bombero-50 font-black p-4 rounded-lg w-full"
-                  @click="router.push({ name: 'sin-tablero' })"
+                  @click="router.push({ name: 'historial' })"
                 >
                   Sin Tablero
                 </v-btn>

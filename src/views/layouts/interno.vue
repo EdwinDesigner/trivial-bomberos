@@ -92,7 +92,6 @@ import {
   IonModal,
   menuController
 } from "@ionic/vue"
-import { ref } from 'vue'
 import { mapGetters } from 'vuex'
 
 export default {
