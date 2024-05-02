@@ -34,13 +34,19 @@
 
         <!-- bottom bar -->
         <div
-          class="absolute bottom-0 left-0 w-full px-6 py-4 z-50 bg-gradient-to-t from-[#CE3333] to-[#F94848] rounded-t-2xl flex justify-center gap-6 items-center">
-          <v-btn elevation="0" rounded="lg" color="#BF2121" class="px-6 font-black">
-            Finalizar
-          </v-btn>
-          <v-btn elevation="0" rounded="lg" color="#FF9433" class="px-6 font-black text-white">
-            Siguiente
-          </v-btn>
+          class="absolute bottom-0 left-0 w-full px-6 py-2 z-50 bg-gradient-to-t from-[#CE3333] to-[#F94848] rounded-t-2xl flex justify-center gap-6 items-center">
+          <div class="p-2 bg-bombero-800 rounded-full flex justify-between items-center max-w-max">
+            <v-btn
+              size="large"
+              rounded="xl"
+              block
+              color="#FF9433"
+              elevation="0"
+              class="text-bombero-800 py-4 px-4 font-bold"
+            >
+              Jugar
+            </v-btn>
+          </div>
         </div>
 
         <div class="absolute z-10 w-full">
@@ -112,7 +118,7 @@
               </div>
 
               <!-- send -->
-              <div class="fixed bottom-20 left-4 right-4 z-50">
+              <div class="fixed bottom-[84px] left-4 right-4 z-50">
                 <div class="bg-white p-2 rounded-2xl relative">
                   <input autofocus type="text" value="Cras consectetur nib" class="w-full focus:border-none focus:outline-none">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-2 right-2">
