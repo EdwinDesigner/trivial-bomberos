@@ -12,7 +12,7 @@
               </svg>
             </v-btn>
           </router-link>
-          <div class="p-2 bg-bombero-800 rounded-full flex justify-between items-center max-w-max">
+          <router-link :to="{ name: 'game-sin-tablero', params: {} }" class="p-2 bg-bombero-800 rounded-full flex justify-between items-center max-w-max">
             <v-btn
               text="JUGAR"
               size="large"
@@ -22,7 +22,7 @@
               elevation="0"
               class="text-bombero-800 py-4 px-4 font-bold"
             ></v-btn>
-          </div>
+          </router-link>
           <div class="w-12 h-12"></div>
         </div>
 
@@ -32,6 +32,7 @@
             <CustomRadio
               :items="fakeCategories"
               @item-clicked="handleItemClicked"
+              :class="'max-h-[calc(100vh-240px)] pb-11'"
             />
           </div>
         </div>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import LayoutAuth from "../views/layouts/auth.vue";
 import Layout from "../views/layouts/interno.vue";
+import LayoutGame from "../views/layouts/game.vue";
 import isAuthenticatedGuard from "./auth-guard";
 
 const routes: Array<RouteRecordRaw> = [
@@ -43,6 +44,20 @@ const routes: Array<RouteRecordRaw> = [
         name: "categoria-sin-tablero",
         component: () => import("@/views/pages/categoria-sin-tablero.vue" as string),
         meta: { title: "Categoría - Sin tablero" },
+        beforeEnter: [isAuthenticatedGuard],
+      },
+    ],
+  },
+  {
+    name: "LayoutGame",
+    path: "/layout-game",
+    component: LayoutGame,
+    children: [
+      {
+        path: "/game-sin-tablero",
+        name: "game-sin-tablero",
+        component: () => import("@/views/pages/game-sin-tablero.vue" as string),
+        meta: { title: "Jugando sin tablero" },
         beforeEnter: [isAuthenticatedGuard],
       },
     ],

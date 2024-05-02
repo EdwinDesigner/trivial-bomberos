@@ -17,6 +17,7 @@
                   elevation="0"
                   color="#BF2121"
                   class="bg-bombero-800 text-bombero-50 font-black p-4 rounded-lg w-full"
+                  @click="updateGameSelected({ game: 'Con Tablero', path: 'Historial' })"
                 >
                   Con Tablero
                 </v-btn>
@@ -35,7 +36,7 @@
                   elevation="0"
                   color="#BF2121"
                   class="bg-bombero-800 text-bombero-50 font-black p-4 rounded-lg w-full"
-                  @click="router.push({ name: 'historial' })"
+                  @click="updateGameSelected({ game: 'Sin Tablero', path: 'Historial' })"
                 >
                   Sin Tablero
                 </v-btn>
@@ -54,19 +55,26 @@
 <script lang="ts">
   import { IonPage } from '@ionic/vue'
   import { useRouter } from 'vue-router'
+  import useAuthHelper from '../../composables/useAuthHelper'
 
   export default {
     components: {
       IonPage,
     },
     setup() {
+      const { gameSelected } = useAuthHelper();
       const router = useRouter()
 
       return {
-        router
+        router,
+        gameSelected
       }
     },
     methods: {
+      async updateGameSelected({ game, path }: { game: string, path: string }) {
+        await this.gameSelected({ gameMode: game })
+        this.router.push({ name: path })
+      }
     },
     async mounted() {
     }

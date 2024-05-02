@@ -1,5 +1,6 @@
 export default () => ({
     navigateName: null,
     navigatePath: null,
-    currentPath: null
+    currentPath: null,
+    gameMode: null
 })

@@ -10,6 +10,9 @@ export default {
           800: '#BF2121',
           950: '#5E0E0E'
         },
+      },
+      fontFamily: {
+        'bebas': ['Bebas Neue', 'sans-serif']
       }
     },
   },

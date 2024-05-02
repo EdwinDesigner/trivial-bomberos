@@ -11,6 +11,7 @@ export const getStatusUser = (state: any) => {
         navigateName: state.navigateName,
         navigatePath: state.navigatePath,
         currentPath: state.currentPath,
+        gameMode: state.gameMode,
     }
 
 }

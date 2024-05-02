@@ -2,8 +2,8 @@
 // }
 
 export const updateStatus = (state: any, 
-    { navigateName, navigatePath, currentPath }: 
-    { navigateName: any, navigatePath: any, currentPath: any }) => {
+    { navigateName, navigatePath, currentPath, gameMode }: 
+    { navigateName: any, navigatePath: any, currentPath: any, gameMode: any }) => {
 
     if (navigateName) {
         state.navigateName = navigateName
@@ -17,6 +17,9 @@ export const updateStatus = (state: any,
         state.currentPath = currentPath
     }
 
+    if (gameMode) {
+        state.gameMode = gameMode
+    }
 }
 
 export const destroyStatus = (state: any) => {
@@ -24,5 +27,6 @@ export const destroyStatus = (state: any) => {
     state.navigateName = null
     state.navigatePath = null
     state.currentPath = null
+    state.gameMode = null
 
 }
