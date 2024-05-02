@@ -60,6 +60,13 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: "Jugando sin tablero" },
         beforeEnter: [isAuthenticatedGuard],
       },
+      {
+        path: "/chat",
+        name: "chat",
+        component: () => import("@/views/pages/chat.vue" as string),
+        meta: { title: "Chat con jugadores" },
+        beforeEnter: [isAuthenticatedGuard],
+      },
     ],
   },
 ]
